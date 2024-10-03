@@ -28,7 +28,6 @@ exports.pay = async (req, res) => {
         return res.status(404).send('Receiver not found');
       }
   
-      // Check if the sender has enough balance
       if (senderAccount.balance < amount) {
         return res.status(400).send("Insufficient balance");
       }
@@ -36,7 +35,6 @@ exports.pay = async (req, res) => {
         return res.status(400).send("Self transfer is prohibted");
       }
   
-      // Create and save the transaction
       const transaction = new Transaction({
         sender: senderId,
         receiver: receiverAccount._id,
