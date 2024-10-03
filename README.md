@@ -4,6 +4,7 @@ You can make transactions using receiver's account number or username.<br>
 You can visit your transactions, and click on them to view full details about the specific transaction (dynamic routing).
 
 ### Steps to use Nixty-bank
+<b>Make sure you've Nodejs installed</b> <br><br>
 Step 1: Download, pull or clone the code into your pc.<br>
 Step 2: Go to client folder, open terminal there, and run:
 ```
