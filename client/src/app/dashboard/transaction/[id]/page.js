@@ -8,6 +8,7 @@ const TransactionDetails = ({ params }) => {
   const [transaction, setTransaction] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+
   useEffect(() => {
     const fetchTransactionDetails = async () => {
       try {
@@ -40,7 +41,7 @@ const TransactionDetails = ({ params }) => {
   return (
     <div className="container mt-5">
       <button
-        className="btn btn-secondary mb-3 mr-3 position-fixed"
+        className="btn btn-secondary mb-3 position-fixed"
         onClick={() => router.push('/dashboard')}
         style={{
           top: '1rem',
@@ -50,13 +51,40 @@ const TransactionDetails = ({ params }) => {
       >
         <i className="bi bi-arrow-left"></i> Dashboard
       </button>
-      <br />
-      <h1 className='text-center '>Transaction Details</h1>
-      <div className="card">
+      <h1 className='text-center mb-4'>Transaction Details</h1>
+      <div className="row">
+        <div className="col-md-6">
+          <div className="card mb-4">
+            <div className="card-header">
+              <h5>Sender's Information</h5>
+            </div>
+            <div className="card-body">
+              <p><strong>Name:</strong> {transaction.sender.name}</p>
+              <p><strong>Username:</strong> {transaction.sender.username}</p>
+              <p><strong>Account No:</strong> {transaction.sender.accountNumber}</p>
+              <p><strong>Email:</strong> {transaction.sender.email}</p>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="card mb-4">
+            <div className="card-header">
+              <h5>Receiver's Information</h5>
+            </div>
+            <div className="card-body">
+              <p><strong>Name:</strong> {transaction.receiver.name}</p>
+              <p><strong>Username:</strong> {transaction.receiver.username}</p>
+              <p><strong>Account No:</strong> {transaction.receiver.accountNumber}</p>
+              <p><strong>Email:</strong> {transaction.receiver.email}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="card mb-4">
+        <div className="card-header">
+          <h5>Transaction Details</h5>
+        </div>
         <div className="card-body">
-          <h4 className="card-title">Transaction Overview</h4>
-          <p><strong>Who Paid:</strong> {transaction.sender.name} (Username: {transaction.sender.username}, Account No: {transaction.sender.accountNumber})</p>
-          <p><strong>Paid To:</strong> {transaction.receiver.name} (Username: {transaction.receiver.username}, Account No: {transaction.receiver.accountNumber})</p>
           <p><strong>Date:</strong> {new Date(transaction.date).toLocaleString()}</p>
           <p><strong>Description:</strong> {transaction.description}</p>
           <p><strong>Amount Paid:</strong> ${transaction.amount.toFixed(2)}</p>

@@ -90,8 +90,8 @@ exports.getTransactions = async(req, res) =>{
 exports.getTransaction = async(req, res)=>{
   try {
     const transaction = await Transaction.findById(req.params.id)
-      .populate('sender', 'username accountNumber name')
-      .populate('receiver', 'username accountNumber name');
+      .populate('sender', 'username accountNumber name email')
+      .populate('receiver', 'username accountNumber name email');
     if (!transaction) {
       return res.status(404).json({ message: 'Transaction not found' });
     }

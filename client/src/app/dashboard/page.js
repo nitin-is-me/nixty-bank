@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 const Dashboard = () => {
   const [username, setUsername] = useState('');
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [balance, setBalance] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -22,6 +23,7 @@ const Dashboard = () => {
         const response = await axios.get('http://localhost:8000/auth/userInfo', { withCredentials: true });
         setName(response.data.name);
         setUsername(response.data.username);
+        setEmail(response.data.email);
         setBalance(response.data.balance);
         setAccountNumber(response.data.accountNumber);
       } catch (error) {
@@ -101,6 +103,7 @@ const Dashboard = () => {
                 )}
               </button>
               <div className="mt-3">My A/c no: <strong>{accountNumber}</strong></div>
+              <div className="mt-3">My Email: <strong>{email}</strong></div>
             </div>
           </div>
 
