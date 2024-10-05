@@ -21,4 +21,9 @@ Step 6: Go in server folder, open terminal, and run:
 npm run start
 ```
 Step 7: Now visit http://localhost:3000 in your browser, and enjoy using Nixty-bank! <br><br>
+## Version History
+| Version | Date       | Summary         |
+|---------|------------|-----------------|
+|1.0      | **03-Oct-2024** | First Update, basic features like username and password authentication, transaction and its history, are implemented |
+<br>
 <i>Improvements and suggestions are most welcome!</i>
