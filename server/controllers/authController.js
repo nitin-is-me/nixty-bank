@@ -6,16 +6,16 @@ const nodemailer = require("nodemailer");
 const tempUsers = {};
 
 const generateOtp = () => {
-    return Math.floor(100000 + Math.random() * 900000); // Generates a 6-digit OTP
+    return Math.floor(100000 + Math.random() * 900000); 
 };
 
 const sendOtpEmail = async (email, otp) => {
-    // Create a transporter object using SMTP transport
+   
     const transporter = nodemailer.createTransport({
-        service: 'gmail', // Change this to your email service
+        service: 'gmail',
         auth: {
-            user: "nitinjha2609@gmail.com", // Your email address
-            pass: "jnaqoiivnkgwgoeq", // Your email password or app password
+            user: "nitinjha2609@gmail.com",
+            pass: "jnaqoiivnkgwgoeq",
         },
     });
 
@@ -65,7 +65,7 @@ exports.verifyOtp = async (req, res) => {
         delete tempUsers[username];
         return res.send("OTP has expired");
     }
-    console.log("Stored OTP:", tempUser.otp); // Log stored OTP
+    // console.log("Stored OTP:", tempUser.otp);
     console.log("Entered OTP:", otp);
 
     if (String(tempUser.otp).trim() !== String(otp).trim()) {

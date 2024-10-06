@@ -13,6 +13,7 @@ const TransactionPage = () => {
   const [message, setMessage] = useState('');
   const [success, setSuccess] = useState(false);
   const [recipientName, setRecipientName] = useState('');
+  const [paymentLoading, setPaymentLoading] = useState(false); 
 
   const router = useRouter();
 
@@ -35,6 +36,7 @@ const TransactionPage = () => {
 
   const handlePayment = async (e) => {
     e.preventDefault();
+    setPaymentLoading(true);
     try {
       const response = await axios.post(
         'http://localhost:8000/transaction/pay',
@@ -52,6 +54,8 @@ const TransactionPage = () => {
     } catch (error) {
       console.error('Error making payment:', error);
       setMessage(error.response?.data || 'Error making payment');
+    } finally {
+      setPaymentLoading(false);
     }
   };
 
@@ -84,16 +88,16 @@ const TransactionPage = () => {
     return (
       <div className="container mt-5 text-center">
         <button
-        className="btn btn-secondary position-fixed"
-        onClick={() => router.push('/dashboard')}
-        style={{
-          top: '1rem',
-          left: '1rem',
-          zIndex: 1000,
-        }}
-      >
-        <i className="bi bi-arrow-left"></i> Dashboard
-      </button>
+          className="btn btn-secondary position-fixed"
+          onClick={() => router.push('/dashboard')}
+          style={{
+            top: '1rem',
+            left: '1rem',
+            zIndex: 1000,
+          }}
+        >
+          <i className="bi bi-arrow-left"></i> Dashboard
+        </button>
         <div className="row justify-content-center">
           <div className="col-md-6">
             <div className="card shadow-lg p-4">
@@ -190,8 +194,15 @@ const TransactionPage = () => {
                   />
                 </div>
                 <span className="text-danger mb-2 w-100">{message}</span>
-                <button type="submit" className="btn mt-2 btn-primary w-100">
-                  Pay
+                <button type="submit" className="btn mt-2 btn-primary w-100" disabled={paymentLoading}>
+                  {paymentLoading ? (
+                    <>
+                      <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                      Processing...
+                    </>
+                  ) : (
+                    'Pay'
+                  )}
                 </button>
               </form>
             </div>
