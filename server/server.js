@@ -25,7 +25,10 @@ app.use(express.json());
 })();
 
 app.use("/auth", authRouter);
-app.use("/transaction", transactionRouter)
+app.use("/transaction", transactionRouter);
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok", message: "Server is running" });
+});
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 })
